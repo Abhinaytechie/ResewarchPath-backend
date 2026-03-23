@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: researchpath-backend
+    env: python
+    region: oregon
+    plan: free # or standard depending on budget
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12 # Ensure compatibility
+      - key: DATABASE_URL
+        sync: false # Set in the Render Dashboard (e.g. Supabase DB URL)
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false # Set this JSON in Render Dashboard as exactly stringified
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: EXA_API_KEY
+        sync: false
+      - key: HUGGINGFACE_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false # e.g. https://your-vercel-domain.vercel.app
